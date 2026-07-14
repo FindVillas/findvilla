@@ -1,3 +1,9 @@
+# Welcome to our lovely project!
+
+<img src="https://raw.githubusercontent.com/FindVillas/findvilla/refs/heads/main/logo.jpg" width="500">
+
+Free villas for everybody, villa for you, villa for me, villa for dog, villa for frog! Long live **potatoconsumer**. Now buckle up -- boring information below 🙄
+
 # FindVillas
 
 A bilingual Thailand villa marketplace built with Next.js 16, Supabase/Postgres, Google Auth, private Supabase Storage, Mapbox, Omise test payments, and transactional email.
