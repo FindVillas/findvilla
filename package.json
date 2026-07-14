@@ -1,0 +1,52 @@
+{
+  "name": "findvillas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:services": "supabase start",
+    "dev:services:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:types": "supabase gen types typescript --local > lib/supabase/database.types.ts",
+    "db:test": "supabase test db",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check": "npm run lint && npm run typecheck && npm test && npm run db:test && npm run build"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.0",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.468.0",
+    "mapbox-gl": "^3.15.0",
+    "next": "^16.0.0",
+    "nodemailer": "^7.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-map-gl": "^8.0.0",
+    "resend": "^6.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@playwright/test": "^1.55.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/mapbox-gl": "^3.4.0",
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "^7.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0",
+    "jsdom": "^26.0.0",
+    "postcss": "^8.5.10",
+    "supabase": "^2.72.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

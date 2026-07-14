@@ -1,0 +1,13 @@
+import Link from "next/link";
+import { CalendarDays, Clock3, Home } from "lucide-react";
+import type { Locale } from "@/lib/types";
+
+export type TripRow = { id:string; reference:string; villaName:string; checkIn:string; checkOut:string; guests:number; status:string; total:number };
+
+export function TripsDashboard({ locale, trips }: { locale: Locale; trips: TripRow[] }) {
+  return <div className="dashboard-shell"><div className="container"><div className="dash-head"><div><div className="eyebrow muted">Guest dashboard</div><h1 className="serif">{locale==="th"?"ทริปของฉัน":"My trips"}</h1></div><Link className="btn btn-primary" href={`/${locale}/villas`}>Find another villa</Link></div>
+    <div className="stat-grid"><div className="stat-card"><div className="stat-label">Active requests</div><div className="stat-value">{trips.filter(t=>["submitted","approved_payment_pending"].includes(t.status)).length}</div></div><div className="stat-card"><div className="stat-label">Confirmed</div><div className="stat-value">{trips.filter(t=>t.status==="confirmed").length}</div></div><div className="stat-card"><div className="stat-label">Upcoming stays</div><div className="stat-value">{trips.filter(t=>t.status==="confirmed"&&t.checkIn>new Date().toISOString().slice(0,10)).length}</div></div><div className="stat-card"><div className="stat-label">Past / closed</div><div className="stat-value">{trips.filter(t=>["declined","expired","cancelled"].includes(t.status)).length}</div></div></div>
+    {trips.length?<div className="panel"><div className="panel-head"><h2>Requests</h2></div><div className="table-wrap"><table><thead><tr><th>Villa</th><th>Dates</th><th>Guests</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>{trips.map(t=><tr key={t.id}><td><strong>{t.villaName}</strong><br/><span className="muted">{t.reference}</span></td><td>{t.checkIn} → {t.checkOut}</td><td>{t.guests}</td><td>฿{t.total.toLocaleString()}</td><td><span className={`status ${t.status==="confirmed"?"live":"pending"}`}><Clock3 size={12}/>{t.status.replaceAll("_"," ")}</span></td><td>{t.status==="approved_payment_pending"?<Link className="mini-btn approve" href={`/${locale}/checkout/${t.id}`}>Pay</Link>:<span className="muted">—</span>}</td></tr>)}</tbody></table></div></div>:<div className="panel empty"><Home size={38}/><h2 className="serif">No trips yet</h2><p>When you request a villa, its status and next step will appear here.</p><Link className="btn btn-dark" href={`/${locale}/villas`}>Explore villas</Link></div>}
+    <div style={{display:"flex",gap:18,marginTop:24,color:"var(--ink-soft)",fontSize:13}}><span><CalendarDays size={15}/> 24-hour partner response</span><span><Clock3 size={15}/> 24-hour approved hold</span></div>
+  </div></div>;
+}
